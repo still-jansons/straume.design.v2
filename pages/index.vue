@@ -2,6 +2,6 @@
     definePageMeta({
         middleware() {
             return navigateTo('/philosophy');
-        },
+        }
     })
 </script>

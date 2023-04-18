@@ -66,24 +66,22 @@ onMounted(() => {
     </div>
     <!--  -->
     <!-- MOBILE VIEW -->
-    <template>
-        <NuxtLink :to="interior._path.replace('/en', '')"
-            class="
-                interior-wrapper flex flex-col px-[30px] min-w-[86vw] max-w-[86vw] snap-always snap-start
-                sm:hidden
-            "
-            :class="interior.position"
-            :style="`align-self: ${interior.position};`"
-        >
-            <InteriorGallery
-                :folder  = "`interiors/${interior.gallery.folder}`"
-                :images  = "[interior.gallery.images[0]]"
-                :altText = "interior.title"
-            />
-            <div class="title flex my-2">
-                <h2 class="text-xl">{{ interior.title }}</h2>
-            </div>
-        </NuxtLink>
-    </template>
+    <NuxtLink :to="interior._path.replace('/en', '')"
+        class="
+            interior-wrapper flex flex-col px-[30px] min-w-[86vw] max-w-[86vw] snap-always snap-start
+            sm:hidden
+        "
+        :class="interior.position"
+        :style="`align-self: ${interior.position};`"
+    >
+        <InteriorGallery
+            :folder  = "`interiors/${interior.gallery.folder}`"
+            :images  = "[interior.gallery.images[0]]"
+            :altText = "interior.title"
+        />
+        <div class="title flex my-2">
+            <h2 class="text-xl">{{ interior.title }}</h2>
+        </div>
+    </NuxtLink>
     <!--  -->
 </template>
