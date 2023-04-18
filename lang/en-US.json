@@ -1,0 +1,27 @@
+{
+    "routes": {
+        "interiors" : "interiors",
+        "philosophy": "philosophy",
+        "stories"   : "stories",
+        "contacts"  : "contacts"
+    },
+    "pages": {
+        "interiors": {
+            "head-title": "Interiors",
+            "head-description": "Catalog with my interiors"
+        },
+        "philosophy": {
+            "head-title"      : "My philiosphy",
+            "head-description": "Evironments that strengthen life",
+            "title"           : "Evironments that strengthen life",
+            "content"         : [
+                "Straume interiors are cultivated within the synthesis of function, rejuvenation, laws of nature and technical accuracy. Using aesthetic elements that always add to the purpose and never cast a shadow over it, there is a distinct effect to Straume design solutions due to the prioritization of function, technical expertise and practicality above all.",
+                "In solidarity with the evolving wordly processes, we measure our design proficiency against how well we are able to revive interior components oftentimes disregarded against the backdrop of all that is lustrous and new. We accentuate the merit of such components and incorporate them in our work while never forgetting about functionality and principles sensitive to the instinctive human affinity for the natural world."
+            ]
+        },
+        "contacts": {
+            "head-title": "Contact me",
+            "head-description": "Straume Design"
+        }
+    }
+}
