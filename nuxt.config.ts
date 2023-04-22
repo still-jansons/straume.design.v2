@@ -38,10 +38,6 @@ export default defineNuxtConfig({
             cookieKey : 'i18n_redirected',
             redirectOn: 'root',              // recommended
         },
-        vueI18n: {
-            fallbackLocale: 'en',
-            legacy        : false,
-            locale        : 'en',
-        }
+        vueI18n: './i18n.config.ts' // if you are using custom path, default
     }
 })
