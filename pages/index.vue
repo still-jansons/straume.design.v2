@@ -1,7 +1,3 @@
 <script setup lang="ts">
-    definePageMeta({
-        middleware() {
-            return navigateTo('/philosophy');
-        }
-    })
+    await navigateTo('/philosophy')
 </script>

@@ -17,10 +17,7 @@ module.exports = {
         },
     },
     plugins: [
-        plugin(function ({ addBase, addComponents, theme }) {
-            addBase({
-
-            }),
+        plugin(function ({ addComponents, theme }) {
             addComponents({
                 '.link': {
                     position     : 'relative',
