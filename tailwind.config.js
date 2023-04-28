@@ -17,7 +17,13 @@ module.exports = {
         },
     },
     plugins: [
-        plugin(function ({ addComponents, theme }) {
+        plugin(function ({ addBase, addComponents, theme }) {
+            addBase({
+                'html'  : {
+                    fontWeight: 500,
+                    background : theme('colors.primary')
+                }
+            })
             addComponents({
                 '.link': {
                     position     : 'relative',
@@ -51,7 +57,7 @@ module.exports = {
                     flexDirection : 'column',
                     alignSelf    : 'center',
                     padding      : '5px',
-                    '& span': {
+                    span: {
                         height              : theme('spacing.2'),
                         width               : theme('spacing.2'),
                         borderRadius        : theme('borderRadius.full'),
@@ -62,6 +68,31 @@ module.exports = {
                     },
                     '&.active span': {
                         backgroundColor: theme('colors.black')
+                    }
+                },
+                '.interior-wrapper': {
+                    transition: 'z-index .5s ease-out',
+                    '&.end': {
+                        flexDirection: 'column-reverse',
+                        '.title': {
+                            alignItems: 'flex-start'
+                        }
+                    },
+                    '.info': {
+                        '&::before': {
+                            content   : "''",
+                            position  : 'absolute',
+                            left      : 0,
+                            right     : 0,
+                            bottom    : '-.5rem',
+                            background: theme('colors.primary-variant'),
+                            transition: 'height .20s ease-out',
+                            zIndex    : -1,
+                            height    : 0
+                        },
+                        '&.active::before': {
+                            height: '.25rem'
+                        }
                     }
                 }
             })

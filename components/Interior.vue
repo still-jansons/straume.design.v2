@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
 
-interface interior {
+interface Interior {
     title  : string
     _path  : string
     gallery: {
@@ -13,20 +12,13 @@ interface interior {
 }
 
 defineProps<{
-    interior    : interior
+    interior    : Interior
     isLastItem  : boolean
     selectedSlug: string | null
     itemIndex   : number
 }>()
 
 defineEmits(['slug-change'])
-
-const is_mobile = ref(true)
-
-onMounted(() => {
-    is_mobile.value = screen.width < 640
-    window.addEventListener('resize', () => is_mobile.value = screen.width < 640)
-})
 
 </script>
 
@@ -58,7 +50,7 @@ onMounted(() => {
             >{{ interior.title }}</NuxtLink>
             <button @click="$emit('slug-change', selectedSlug == interior._path ? null : interior._path)"
                 class="
-                    info uppercase text-xl
+                    relative info uppercase text-xl
                     2xl:text-3xl
                 "
                 :class="{ 'active': selectedSlug == interior._path}">INFO</button>

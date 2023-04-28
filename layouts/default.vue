@@ -1,14 +1,13 @@
 <script setup lang="ts">
-const { t } = useI18n()
 const head  = useLocaleHead({
     addDirAttribute    : true,
-    identifierAttribute : 'id',
+    identifierAttribute: 'id',
     addSeoAttributes   : true
 })
 </script>
 
 <template>
-    <div>
+    <div class="antialiased relative">
         <Html :lang="head.htmlAttrs?.lang" :dir="head.htmlAttrs?.dir">
             <AppHeader />
             <slot />

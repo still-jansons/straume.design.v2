@@ -26,7 +26,7 @@
                 />
             </template>
             <div v-if="info" class="relative z-[-1]">
-                <transition :name="`slide-${isLastItem ? 'left' : 'right'}`">
+                <Transition :name="`slide-${isLastItem ? 'left' : 'right'}`">
                     <div v-show="showInfo"
                         class="
                             absolute bottom-0 p-6 bg-primary-variant wrapper-info
@@ -40,7 +40,7 @@
                             2xl:text-2xl
                         ">{{ info }}</p>
                     </div>
-                </transition>
+                </Transition>
             </div>
         </figure>
         <div v-if="images.length > 1" class="hidden sm:flex sm:items-center mt-[13px] pagination">
@@ -61,37 +61,27 @@
         flex-direction: column-reverse;
     }
     .gallery-wrapper.reverse .pagination {
-        margin-top   : 0px;
+        margin-top   : 0;
         margin-bottom: 13px;
-    } 
-
-    .slide-right-enter-active,
-    .slide-right-leave-active,
-    .slide-left-enter-active,
-    .slide-left-leave-active {
+    }
+    .wrapper-info {
         transition: all .5s ease;
     }
 
-    .slide-right-enter,
-    .slide-right-leave-active,
-    .slide-left-enter,
-    .slide-left-leave-active {
+    .slide-right-enter-from,
+    .slide-right-leave-to,
+    .slide-left-enter-from,
+    .slide-left-leave-to {
         opacity: 0;
     }
 
-    .slide-left-enter {
+    .slide-left-enter-from,
+    .slide-left-leave-to {
         right: -6rem;
     }
 
-    .slide-right-enter {
-        left: -6rem;
-    }
-
-    .slide-left-leave-active {
-        right: -6rem;
-    }
-
-    .slide-right-leave-active {
+    .slide-right-enter-from,
+    .slide-right-leave-to {
         left: -6rem;
     }
 </style>

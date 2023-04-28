@@ -22,6 +22,12 @@
         "contacts": {
             "head-title": "Contact me",
             "head-description": "Straume Design"
+        },
+        "stories": {
+            "head-title": "In the circle of current events in contemporary design.",
+            "head-description": "Studio’s founder Annija Straume occasionally writes educational pieces on symbiosis of design, purposeful innovations and nature, giving a glimpse into an in-depth understanding of design to both professionals of the field and curious passers by.",
+            "title": "In the circle of current events in contemporary design.",
+            "content": "Studio’s founder Annija Straume occasionally writes educational pieces on symbiosis of design, purposeful innovations and nature, giving a glimpse into an in-depth understanding of design to both professionals of the field and curious passers by."
         }
     }
 }

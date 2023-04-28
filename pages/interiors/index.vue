@@ -3,9 +3,6 @@
     const localePath    = useLocalePath();
     const selected_slug = ref(null);
 
-    // const { data } = await useAsyncData('home', () => queryContent(`/${locale.value}/interiors`).find());
-    // console.log(data.value);
-
     useHead({
         link: [
             { rel: 'canonical', href: `https://straume.design${localePath('interiors')}` }
@@ -24,11 +21,11 @@
             sm:pt-[55px] sm:pb-[140px]
         ">
             <ContentList :path="`${locale}/interiors`" v-slot="{ list }">
-                <Interior v-for="(interior, index) in list" :key="interior._path" 
-                    :item-index    = "index"
+                <Interior v-for="(interior, index) in list" :key="interior._path"
+                    :item-index    = "index as number"
                     :interior      = "interior"
                     :is-last-item  = "(index > 0 && index + 1 === list.length)"
-                    :selected-slug = "selected_slug"
+                    :selected-slug = "selected_slug as string"
                     @slug-change   = "selected_slug = $event"
                 />
             </ContentList>

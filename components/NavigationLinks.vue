@@ -3,19 +3,19 @@
     const links = [
         {
             title: 'routes.interiors',
-            url  : '/interiors'
+            url  : 'interiors'
         },
         {
             title: 'routes.philosophy',
-            url  : '/philosophy'
+            url  : 'philosophy'
         },
         {
             title: 'routes.stories',
-            url  : '/stories'
+            url  : 'stories'
         },
         {
             title: 'routes.contacts',
-            url  : '/contacts'
+            url  : 'contacts'
         },
     ]
 </script>
