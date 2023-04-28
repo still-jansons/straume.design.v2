@@ -34,11 +34,11 @@ export default defineNuxtConfig({
         lazy                 : false,
         langDir              : 'lang/',
         defaultLocale        : 'en',
-        detectBrowserLanguage: {
-            useCookie : true,
-            cookieKey : 'i18n_redirected',
-            redirectOn: 'root',              // recommended
-        },
+        // detectBrowserLanguage: {
+        //     useCookie : true,
+        //     cookieKey : 'i18n_redirected',
+        //     redirectOn: 'root',              // recommended
+        // },
         vueI18n: './i18n.config.ts' // if you are using custom path, default
     }
 })
