@@ -17,7 +17,7 @@ defineProps<{
 
 <template>
     <div class="contents">
-        <div :to="story._path.replace('/en', '')"
+        <NuxtLink :to="story._path.replace('/en', '')"
             class="
                 snap-always snap-start
                 px-[30px] min-w-[86vw] max-w-[86vw]
@@ -26,12 +26,7 @@ defineProps<{
             :class="{ 'sm:flex-col-reverse': story.position == 'end' }"
             :style="`align-self: ${story.position};`"
         >
-            <nuxt-picture :src="`/images/stories/${story.gallery.folder}/${story.cover_image}`"
-                :imgAttrs="{
-                    class: 'h-full w-full sm:w-auto sm:max-w-[50vw] sm:max-h-[50vh] 2xl:max-h-[60vh]',
-                    alt: `${story.cover_image}`
-                }"
-            />
+            <nuxt-img :src="`/images/stories/${story.gallery.folder}/${story.cover_image}`" class='h-full w-full sm:w-auto sm:max-w-[50vw] sm:max-h-[50vh] 2xl:max-h-[60vh]' :alt="story.cover_image" />
             <div class="mt-2 sm:mt-3 z-10" :class="{ 'mb-4': story.position == 'end' }">
                 <h2 class="
                     text-xl mb-2
@@ -42,6 +37,6 @@ defineProps<{
                     2xl:text-xl
                 ">Read</NuxtLink>
             </div>
-        </div>
+        </NuxtLink>
     </div>
 </template>

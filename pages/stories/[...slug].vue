@@ -70,7 +70,7 @@ onMounted(() => {
                         <nuxt-picture :src="`/images/stories/${story.gallery.folder}/${image}`"
                                       :imgAttrs="{
                                 class: 'relative min-h-full max-h-full w-auto min-w-[100%] max-w-none',
-                                alt: `${image.info}`,
+                                alt: `${image}`,
                             }" />
                         <span class="block absolute bottom-0 left-[30px] right-0 p-[15px] text-xs bg-primary opacity-0 group-hover:opacity-100"
                               :class="{ 'right-[30px]': story.gallery.images.length == index + 1 }">{{ image.substring(0, image.lastIndexOf('.')) }}</span>
