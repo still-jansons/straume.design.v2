@@ -60,7 +60,7 @@ onMounted(() => {
         <!-- DESKTOP VIEW -->
         <div v-if="!is_mobile" class="hidden sm:grid h-screen grid-cols-[minmax(300px,_20%)_1fr] bg-secondary">
             <div class="bg-primary px-[40px] pt-[140px] pb-[100px] flex flex-col justify-between h-full relative shadow-[6px_0_15px_-3px_rgba(0,0,0,0.1),0_0_6px_-4px_rgba(0,0,0,0.1)] z-10">
-                <h1 class="whitespace-pre-line text-2xl 2xl:text-5xl">{{ story.title.replace(/\s+/g, '\n') }}</h1>
+                <h1 class="whitespace-pre-line text-2xl 2xl:text-5xl">{{ data?.title.replace(/\s+/g, '\n') }}</h1>
                 <p class="whitespace-pre-line text-base font-normal 2xl:text-xl">{{ story.info }}</p>
             </div>
             <div class="h-screen overflow-hidden pt-[140px] pb-[100px] flex flex-col">
