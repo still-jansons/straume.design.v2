@@ -34,10 +34,10 @@ export default defineNuxtConfig({
         lazy                 : false,
         langDir              : 'lang/',
         defaultLocale        : 'en',
-        detectBrowserLanguage: {
-            useCookie: true,
-            cookieKey: 'i18n_redirected',
-            redirectOn: 'root',              // recommended
-        }
+        // detectBrowserLanguage: {
+        //     useCookie: true,
+        //     cookieKey: 'i18n_redirected',
+        //     redirectOn: 'root',              // recommended
+        // }
     }
 })
