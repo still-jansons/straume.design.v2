@@ -49,7 +49,8 @@ onMounted(() => {
                 </div>
             </div>
             <div class="p-[30px] text-base text-left font-normal">
-                <ContentRenderer :value="data" />
+<!--                <ContentRenderer :value="data" />-->
+                <ContentDoc :path="`${locale}/stories/${route.params.slug}`" />
             </div>
             <div class="p-[30px] bg-primary">
                 <p class="whitespace-pre-line text-base">{{ story.info }}</p>
@@ -81,7 +82,7 @@ onMounted(() => {
                         h-full text-base font-normal columns-2xs gap-[30px] text-left px-[30px] pt-[30px] overflow-x-auto hide-scroll
                         2xl:text-xl 2xl:columns-md
                     ">
-                        <ContentRenderer :value="data" />
+                        <ContentDoc :path="`${locale}/stories/${route.params.slug}`" />
                     </div>
                 </div>
             </div>
