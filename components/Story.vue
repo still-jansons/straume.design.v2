@@ -6,9 +6,12 @@ defineProps<{
         _path  : string
         gallery: {
             folder: string
-            images: string[]
+            images: {
+                name     : string,
+                extension: string
+            }[]
         }
-        cover_image: string
+        cover_image: number
         position   : 'start' | 'center' | 'end'
     }
     index: number | string
@@ -26,7 +29,12 @@ defineProps<{
             :class="{ 'sm:flex-col-reverse': story.position == 'end' }"
             :style="`align-self: ${story.position};`"
         >
-            <nuxt-img :src="`/images/stories/${story.gallery.folder}/${story.cover_image}`" class='h-full w-full sm:w-auto sm:max-w-[50vw] sm:max-h-[50vh] 2xl:max-h-[60vh]' :alt="story.cover_image" />
+            <nuxt-picture :src="`/images/stories/${story.gallery.folder}/${story.cover_image + story.gallery.images[story.cover_image].extension}`"
+                :imgAttrs="{
+                    class: 'h-full w-full sm:w-auto sm:max-w-[50vw] sm:max-h-[50vh] 2xl:max-h-[60vh]',
+                    alt: `${story.gallery.images[story.cover_image].name}`
+                }"
+            />
             <div class="mt-2 sm:mt-3 z-10" :class="{ 'mb-4': story.position == 'end' }">
                 <h2 class="
                     text-xl mb-2

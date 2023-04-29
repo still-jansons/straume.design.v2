@@ -39,13 +39,13 @@ onMounted(() => {
             <div class="relative flex items-center overflow-x-auto">
                 <div v-for="(image, index) in story.gallery.images" :key="index"
                      class="pl-[30px] last:pr-[30px] scroll-smooth">
-                    <nuxt-picture :src="`/images/stories/${story.gallery.folder}/${image}`"
+                    <nuxt-picture :src="`/images/stories/${story.gallery.folder}/${index + image.extension}`"
                         :imgAttrs="{
                             class: 'h-[30vh] max-w-none',
                             alt: `${story.cover_image}`
                         }"
                     />
-                    <span class="text-xs p-[10px_15px] bg-primary block">{{ image.substring(0, image.lastIndexOf('.')) }}</span>
+                    <span class="text-xs p-[10px_15px] bg-primary block">{{ image.name }}</span>
                 </div>
             </div>
             <div class="p-[30px] text-base text-left font-normal">
@@ -67,13 +67,13 @@ onMounted(() => {
                     <div v-for="(image, index) in story.gallery.images" :key="index"
                          class="relative group h-full pl-[30px] scroll-smooth"
                          :class="{ 'snap-always snap-start': mounted, 'pr-[30px]': story.gallery.images.length == index + 1 }">
-                        <nuxt-picture :src="`/images/stories/${story.gallery.folder}/${image}`"
-                                      :imgAttrs="{
+                        <nuxt-picture :src="`/images/stories/${story.gallery.folder}/${index + image.extension}`"
+                            :imgAttrs="{
                                 class: 'relative min-h-full max-h-full w-auto min-w-[100%] max-w-none',
                                 alt: `${image}`,
                             }" />
                         <span class="block absolute bottom-0 left-[30px] right-0 p-[15px] text-xs bg-primary opacity-0 group-hover:opacity-100"
-                              :class="{ 'right-[30px]': story.gallery.images.length == index + 1 }">{{ image.substring(0, image.lastIndexOf('.')) }}</span>
+                              :class="{ 'right-[30px]': story.gallery.images.length == index + 1 }">{{ image.name }}</span>
                     </div>
                 </div>
                 <div class="h-[60%]">
