@@ -55,12 +55,17 @@
 <!--                             :alt="`${doc.title} (${image})`"-->
 <!--                             loading="lazy"-->
 <!--                        />-->
+<!--                        <nuxt-picture :src="`/images/interiors/${doc.gallery.folder}/${image}.webp`"-->
+<!--                            :imgAttrs="{-->
+<!--                                class: 'max-w-[none] h-full max-h-[stretch]',-->
+<!--                                alt: `${doc.title} (${image})`,-->
+<!--                                loading: 'lazy'-->
+<!--                            }"-->
+<!--                        />-->
                         <nuxt-img :src="`/images/interiors/${doc.gallery.folder}/${image}.webp`"
-                            :imgAttrs="{
-                                class: 'max-w-[none] h-full max-h-[stretch]',
-                                alt: `${doc.title} (${image})`,
-                                loading: 'lazy'
-                            }"
+                                  class="max-w-[none] h-full max-h-[stretch]"
+                                  :alt="`${doc.title} (${image})`"
+                                  loading="lazy"
                         />
                     </figure>
                 </div>
