@@ -44,8 +44,5 @@ export default defineNuxtConfig({
         dir: 'public',
         target: 'static',
         provider: 'netlify'
-    },
-    nitro: {
-        preset: 'netlify'
     }
 })
