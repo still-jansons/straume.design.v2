@@ -17,12 +17,15 @@
     <div class="gallery-wrapper flex flex-col" :class="{ reverse: paginationOnTop }">
         <figure class="image flex" :class="{ 'flex-row-reverse': isLastItem }">
             <template v-for="(image, index) of images">
-                <nuxt-picture v-show="selected_image == index"
-                    :src="`/images/${folder}/${image}.webp`"
-                    :imgAttrs="{
-                        class: 'w-auto max-w-full max-h-[45vh] relative sm:w-auto sm:max-w-none sm:h-[45vh]',
-                        alt: `${altText} (${images[selected_image]})`
-                    }"
+                <nuxt-picture
+                        v-show="selected_image == index"
+                        :src="`/images/${folder}/${image}.webp`"
+                        :imgAttrs="{
+                            class: 'w-auto max-w-full max-h-[45vh] relative sm:w-auto sm:max-w-none sm:h-[45vh]',
+                            alt: `${altText} (${images[selected_image]})`,
+                            loading: 'lazy'
+                        }"
+                        legacyFormat="webp"
                 />
             </template>
             <div v-if="info" class="relative z-[-1]">
