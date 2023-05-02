@@ -68,15 +68,15 @@
             </div>
             <div class="flex pt-[140px] pb-[140px] overflow-x-auto relative z-0 scroll-smooth"  :class="{ 'snap-x snap-mandatory' : mounted }">
                 <figure v-for="(image, index) in interior.gallery.images" :key="index" class="min-h-full px-[30px]"  :class="{ 'snap-always snap-start': mounted }">
-                    <img :src="`/images/interiors/${interior.gallery.folder}/${image}.webp`"
-                         class="max-w-[none] h-full max-h-[stretch]"
-                         :alt="`${interior.title} (${image})`" />
-<!--                    <nuxt-picture :src="`/images/interiors/${interior.gallery.folder}/${image}.webp`"-->
-<!--                        :imgAttrs="{-->
-<!--                            class: 'max-w-[none] h-full max-h-[stretch]',-->
-<!--                            alt: `${interior.title} (${image})`,-->
-<!--                        }"-->
-<!--                    />-->
+<!--                    <img :src="`/images/interiors/${interior.gallery.folder}/${image}.webp`"-->
+<!--                         class="max-w-[none] h-full max-h-[stretch]"-->
+<!--                         :alt="`${interior.title} (${image})`" />-->
+                    <nuxt-picture :src="`/images/interiors/${interior.gallery.folder}/${image}.webp`"
+                        :imgAttrs="{
+                            class: 'max-w-[none] h-full max-h-[stretch]',
+                            alt: `${interior.title} (${image})`,
+                        }"
+                    />
                 </figure>
             </div>
         </div>
