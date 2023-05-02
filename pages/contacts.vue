@@ -37,11 +37,12 @@
             </div>
         </div>
         <nuxt-picture
-              :src="`/images/interiors/A6/A6_1.webp`"
-              :imgAttrs="{
+            legacyFormat="webp"
+            :src="`/images/interiors/A6/A6_1.webp`"
+            :imgAttrs="{
                 class: 'w-auto max-w-full max-h-[45vh]',
                 alt: `Test image`
-              }"
+            }"
         />
     </div>
 </template>
