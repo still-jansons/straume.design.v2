@@ -21,8 +21,7 @@
                     :src="`/images/${folder}/${image}.webp`"
                     :imgAttrs="{
                         class: 'w-auto max-w-full max-h-[45vh] relative sm:w-auto sm:max-w-none sm:h-[45vh]',
-                        alt: `${altText} (${images[selected_image]})`,
-                        loading: 'lazy'
+                        alt: `${altText} (${images[selected_image]})`
                     }"
                 />
             </template>
