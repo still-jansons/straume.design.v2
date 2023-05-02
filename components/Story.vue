@@ -32,8 +32,7 @@ defineProps<{
             <nuxt-picture :src="`/images/stories/${story.gallery.folder}/${story.cover_image + story.gallery.images[story.cover_image].extension}`"
                 :imgAttrs="{
                     class: 'h-full w-full sm:w-auto sm:max-w-[50vw] sm:max-h-[50vh] 2xl:max-h-[60vh]',
-                    alt: `${story.gallery.images[story.cover_image].name}`,
-                    loading: 'lazy'
+                    alt: `${story.gallery.images[story.cover_image].name}`
                 }"
             />
             <div class="mt-2 sm:mt-3 z-10" :class="{ 'mb-4': story.position == 'end' }">
