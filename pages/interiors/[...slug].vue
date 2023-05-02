@@ -1,22 +1,8 @@
 <script setup lang="ts">
     const route      = useRoute()
     const { locale } = useI18n()
-    // const { data }   = await useAsyncData('interior', () => queryContent(`${locale.value}/interiors/${route.params.slug}`).findOne());
     const is_mobile  = ref(true)
     const mounted    = ref(false)
-
-    // const interior = computed(() => {
-    //     return {
-    //         title  : data.value?.title,
-    //         _path  : data.value?._path,
-    //         gallery: {
-    //             folder: data.value?.gallery.folder,
-    //             images: data.value?.gallery.images
-    //         },
-    //         description: data.value?.description,
-    //         position   : data.value?.position
-    //     }
-    // });
 
     onMounted(() => {
         setTimeout(() => {
@@ -38,7 +24,7 @@
                 <div class="fixed right-0 inset-y-0 bg-secondary w-[80px] z-0"></div>
                 <div class="flex items-center overflow-x-auto overflow-y-hidden hide-scroll z-10"
                      :class="{ 'snap-x snap-mandatory' : mounted }">
-    
+
                     <div class="px-[30px] min-w-[70vw] relative pt-[60px] pb-[60px]">
                         <p class="whitespace-pre-line text-base font-normal">{{ doc.description }}</p>
                     </div>
@@ -49,13 +35,6 @@
                             :alt="`${doc.title} (${image})`"
                             loading="lazy"
                         />
-    <!--                    <nuxt-picture-->
-    <!--                        :src="`/images/interiors/${doc.gallery.folder}/${image}.webp`"-->
-    <!--                        :imgAttrs="{-->
-    <!--                            class: 'max-w-none h-full',-->
-    <!--                            alt: `${doc.title} (${image})`,-->
-    <!--                        }"-->
-    <!--                    />-->
                     </figure>
                 </div>
             </div>
@@ -71,15 +50,17 @@
                 </div>
                 <div class="flex pt-[140px] pb-[140px] overflow-x-auto relative z-0 scroll-smooth"  :class="{ 'snap-x snap-mandatory' : mounted }">
                     <figure v-for="(image, index) in doc.gallery.images" :key="index" class="min-h-full px-[30px]"  :class="{ 'snap-always snap-start': mounted }">
-    <!--                    <img :src="`/images/interiors/${doc.gallery.folder}/${image}.webp`"-->
-    <!--                         class="max-w-[none] h-full max-h-[stretch]"-->
-    <!--                         :alt="`${doc.title} (${image})`" />-->
-                        <nuxt-picture :src="`/images/interiors/${doc.gallery.folder}/${image}.webp`"
-                            :imgAttrs="{
-                                class: 'max-w-[none] h-full max-h-[stretch]',
-                                alt: `${doc.title} (${image})`,
-                            }"
+                        <img :src="`/images/interiors/${doc.gallery.folder}/${image}.webp`"
+                             class="max-w-[none] h-full max-h-[stretch]"
+                             :alt="`${doc.title} (${image})`"
+                             loading="lazy"
                         />
+<!--                        <nuxt-picture :src="`/images/interiors/${doc.gallery.folder}/${image}.webp`"-->
+<!--                            :imgAttrs="{-->
+<!--                                class: 'max-w-[none] h-full max-h-[stretch]',-->
+<!--                                alt: `${doc.title} (${image})`,-->
+<!--                            }"-->
+<!--                        />-->
                     </figure>
                 </div>
             </div>
