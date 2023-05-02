@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 const { locale } = useI18n()
-const route      = useRoute()// const { data }   = await useAsyncData('stories', () => queryContent(`${locale.value}/stories/${route.params.slug}`).findOne());
+const route      = useRoute()
+// const { data }   = await useAsyncData('stories', () => queryContent(`${locale.value}/stories/${route.params.slug}`).findOne());
 const is_mobile  = ref(true)
 const mounted    = ref(false)
 
