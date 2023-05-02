@@ -5,6 +5,16 @@
     const is_mobile  = ref(true)
     const mounted    = ref(false)
 
+    useHead({
+        link: [
+            { rel: 'canonical', href: `https://straume.design/${route.params.slug}` }
+        ],
+        title: `${interior.title} | Straume Design`,
+        meta: [
+            { name: 'description', content: interior.description }
+        ]
+    })
+
     onMounted(() => {
         setTimeout(() => {
             mounted.value = true;

@@ -9,7 +9,7 @@ useHead({
     ],
     title: `${t('pages.stories.head-title')} | Straume Design`,
     meta: [
-        { name: 'description', content: t('pages.stories.head-title') }
+        { name: 'description', content: t('pages.stories.head-description') }
     ]
 })
 

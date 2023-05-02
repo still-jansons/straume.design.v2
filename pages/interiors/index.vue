@@ -9,7 +9,7 @@
         ],
         title: `${t('pages.interiors.head-title')} | Straume Design`,
         meta: [
-            { name: 'description', content: t('pages.interiors.head-title') }
+            { name: 'description', content: t('pages.interiors.head-description') }
         ]
     })
 </script>

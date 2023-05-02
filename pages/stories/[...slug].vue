@@ -5,6 +5,16 @@ const story      = await queryContent(`${locale.value}/stories/${route.params.sl
 const is_mobile  = ref(true)
 const mounted    = ref(false)
 
+useHead({
+    link: [
+        { rel: 'canonical', href: `https://straume.design/${route.params.slug}` }
+    ],
+    title: `${story.title} | Straume Design`,
+    meta: [
+        { name: 'description', content: story.description }
+    ]
+})
+
 onMounted(() => {
     setTimeout(() => {
         mounted.value = true;
