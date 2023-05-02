@@ -50,17 +50,18 @@
                 </div>
                 <div class="flex pt-[140px] pb-[140px] overflow-x-auto relative z-0 scroll-smooth"  :class="{ 'snap-x snap-mandatory' : mounted }">
                     <figure v-for="(image, index) in doc.gallery.images" :key="index" class="min-h-full px-[30px]"  :class="{ 'snap-always snap-start': mounted }">
-                        <img :src="`/images/interiors/${doc.gallery.folder}/${image}.webp`"
-                             class="max-w-[none] h-full max-h-[stretch]"
-                             :alt="`${doc.title} (${image})`"
-                             loading="lazy"
-                        />
-<!--                        <nuxt-picture :src="`/images/interiors/${doc.gallery.folder}/${image}.webp`"-->
-<!--                            :imgAttrs="{-->
-<!--                                class: 'max-w-[none] h-full max-h-[stretch]',-->
-<!--                                alt: `${doc.title} (${image})`,-->
-<!--                            }"-->
+<!--                        <img :src="`/images/interiors/${doc.gallery.folder}/${image}.webp`"-->
+<!--                             class="max-w-[none] h-full max-h-[stretch]"-->
+<!--                             :alt="`${doc.title} (${image})`"-->
+<!--                             loading="lazy"-->
 <!--                        />-->
+                        <nuxt-img :src="`/images/interiors/${doc.gallery.folder}/${image}.webp`"
+                            :imgAttrs="{
+                                class: 'max-w-[none] h-full max-h-[stretch]',
+                                alt: `${doc.title} (${image})`,
+                                loading: 'lazy'
+                            }"
+                        />
                     </figure>
                 </div>
             </div>
