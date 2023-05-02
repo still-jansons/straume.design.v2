@@ -42,6 +42,7 @@ export default defineNuxtConfig({
     },
     image: {
         dir: 'public',
-        target: 'static'
+        target: 'static',
+        provider: 'netlify'
     }
 })
