@@ -1,23 +1,8 @@
 <script lang="ts" setup>
 const { locale } = useI18n()
-const route      = useRoute()
-// const { data }   = await useAsyncData('stories', () => queryContent(`${locale.value}/stories/${route.params.slug}`).findOne());
+const route      = useRoute()// const { data }   = await useAsyncData('stories', () => queryContent(`${locale.value}/stories/${route.params.slug}`).findOne());
 const is_mobile  = ref(true)
 const mounted    = ref(false)
-
-// const story = computed(() => {
-//     return {
-//         title  : data.value?.title,
-//         _path  : data.value?._path,
-//         gallery: {
-//             folder: data.value?.gallery.folder,
-//             images: data.value?.gallery.images
-//         },
-//         info       : data.value?.info,
-//         position   : data.value?.position,
-//         cover_image: data.value?.cover_image
-//     }
-// })
 
 onMounted(() => {
     setTimeout(() => {
@@ -30,7 +15,7 @@ onMounted(() => {
 })
 </script>
 <template>
-    <div class="contents">
+<!--    <div class="contents">-->
         <ContentDoc :path="`${locale}/stories/${route.params.slug}`" v-slot="{ doc }">
             <!-- MOBILE VIEW -->
             <div v-if="is_mobile" class="sm:hidden w-screen min-h-full bg-secondary pt-[120px]">
@@ -40,21 +25,22 @@ onMounted(() => {
                 <div class="relative flex items-center overflow-x-auto">
                     <div v-for="(image, index) in doc.gallery.images" :key="index"
                          class="pl-[30px] last:pr-[30px] scroll-smooth">
-                        <img :src="`/images/stories/${doc.gallery.folder}/${index + image.extension}`"
-                             class="h-[30vh] max-w-none"
-                             :alt="image.name"
-                             loading="lazy"/>
-    <!--                    <nuxt-picture :src="`/images/stories/${story.gallery.folder}/${index + image.extension}`"-->
-    <!--                        :imgAttrs="{-->
-    <!--                            class: 'h-[30vh] max-w-none',-->
-    <!--                            alt: `${image.name}`-->
-    <!--                        }"-->
-    <!--                    />-->
+<!--                        <img :src="`/images/stories/${doc.gallery.folder}/${index + image.extension}`"-->
+<!--                             class="h-[30vh] max-w-none"-->
+<!--                             :alt="image.name"-->
+<!--                             loading="lazy"/>-->
+                        <nuxt-picture :src="`/images/stories/${doc.gallery.folder}/${index + image.extension}`"
+                            :imgAttrs="{
+                                class: 'h-[30vh] max-w-none',
+                                alt: `${image.name}`,
+                                loading: 'lazy'
+                            }"
+                        />
                         <span class="text-xs p-[10px_15px] bg-primary block">{{ image.name }}</span>
                     </div>
                 </div>
                 <div class="p-[30px] text-base text-left font-normal">
-    <!--                <ContentDoc :path="`${locale}/stories/${route.params.slug}`" />-->
+                    <ContentRenderer :value="doc" />
                 </div>
                 <div class="p-[30px] bg-primary">
                     <p class="whitespace-pre-line text-base">{{ doc.info }}</p>
@@ -72,14 +58,15 @@ onMounted(() => {
                         <div v-for="(image, index) in doc.gallery.images" :key="index"
                              class="relative group h-full pl-[30px] scroll-smooth"
                              :class="{ 'snap-always snap-start': mounted, 'pr-[30px]': doc.gallery.images.length == index + 1 }">
-                            <img :src="`/images/stories/${doc.gallery.folder}/${index + image.extension}`"
-                                 class="relative min-h-full max-h-full w-auto min-w-[100%] max-w-none"
-                                 :alt="image.name" loading="lazy" />
-    <!--                        <nuxt-picture :src="`/images/stories/${story.gallery.folder}/${index + image.extension}`"-->
-    <!--                            :imgAttrs="{-->
-    <!--                                class: 'relative min-h-full max-h-full w-auto min-w-[100%] max-w-none',-->
-    <!--                                alt: `${image.name}`,-->
-    <!--                            }" />-->
+<!--                            <img :src="`/images/stories/${doc.gallery.folder}/${index + image.extension}`"-->
+<!--                                 class="relative min-h-full max-h-full w-auto min-w-[100%] max-w-none"-->
+<!--                                 :alt="image.name" loading="lazy" />-->
+                            <nuxt-picture :src="`/images/stories/${doc.gallery.folder}/${index + image.extension}`"
+                                :imgAttrs="{
+                                    class: 'relative min-h-full max-h-full w-auto min-w-[100%] max-w-none',
+                                    alt: `${image.name}`,
+                                    loading: 'lazy'
+                                }" />
                             <span class="block absolute bottom-0 left-[30px] right-0 p-[15px] text-xs bg-primary opacity-0 group-hover:opacity-100"
                                   :class="{ 'right-[30px]': doc.gallery.images.length == index + 1 }">{{ image.name }}</span>
                         </div>
@@ -90,13 +77,11 @@ onMounted(() => {
                             2xl:text-xl 2xl:columns-md
                         ">
                             <ContentRenderer :value="doc" />
-
-<!--                            <ContentDoc :path="`${locale}/stories/${route.params.slug}`" />-->
                         </div>
                     </div>
                 </div>
             </div>
             <!--  -->
         </ContentDoc>
-    </div>
+<!--    </div>-->
 </template>
