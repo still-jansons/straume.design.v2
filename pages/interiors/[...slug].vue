@@ -1,8 +1,22 @@
 <script setup lang="ts">
     const route      = useRoute()
     const { locale } = useI18n()
+    const data   = await queryContent(`${locale.value}/interiors/${route.params.slug}`).findOne();
     const is_mobile  = ref(true)
     const mounted    = ref(false)
+
+    // const interior = computed(() => {
+    //     return {
+    //         title  : data.value?.title,
+    //         _path  : data.value?._path,
+    //         gallery: {
+    //             folder: data.value?.gallery.folder,
+    //             images: data.value?.gallery.images
+    //         },
+    //         description: data.value?.description,
+    //         position   : data.value?.position
+    //     }
+    // });
 
     onMounted(() => {
         setTimeout(() => {
@@ -14,25 +28,25 @@
 </script>
 
 <template>
-    <ContentDoc :path="`${locale}/interiors/${route.params.slug}`" v-slot="{ doc }">
+<!--    <ContentDoc :path="`${locale}/interiors/${route.params.slug}`" v-slot="{ doc }">-->
         <div class="h-screen max-h-[stretch] bg-secondary">
             <!-- MOBILE VERSION -->
             <div v-if="is_mobile" class="flex sm:hidden justify-center flex-col h-full pt-[120px] pb-[40px]">
                 <div class="pl-[30px] w-[85%] z-20 relative mb-[-1.1rem]">
-                    <h1 class="whitespace-pre-line text-3xl">{{ doc.title.replace(/\s+/g, '\n') }}</h1>
+                    <h1 class="whitespace-pre-line text-3xl">{{ data.title.replace(/\s+/g, '\n') }}</h1>
                 </div>
                 <div class="fixed right-0 inset-y-0 bg-secondary w-[80px] z-0"></div>
                 <div class="flex items-center overflow-x-auto overflow-y-hidden hide-scroll z-10"
                      :class="{ 'snap-x snap-mandatory' : mounted }">
 
                     <div class="px-[30px] min-w-[70vw] relative pt-[60px] pb-[60px]">
-                        <p class="whitespace-pre-line text-base font-normal">{{ doc.description }}</p>
+                        <p class="whitespace-pre-line text-base font-normal">{{ data.description }}</p>
                     </div>
-                    <figure v-for="(image, index) in doc.gallery.images" :key="index" class="px-[30px] h-[50vh] scroll-smooth">
+                    <figure v-for="(image, index) in data.gallery.images" :key="index" class="px-[30px] h-[50vh] scroll-smooth">
                         <img
-                            :src="`/images/interiors/${doc.gallery.folder}/${image}.webp`"
+                            :src="`/images/interiors/${data.gallery.folder}/${image}.webp`"
                             class="max-w-none h-full"
-                            :alt="`${doc.title} (${image})`"
+                            :alt="`${data.title} (${image})`"
                             loading="lazy"
                         />
                     </figure>
@@ -45,31 +59,31 @@
                     <h1 class="
                         whitespace-pre-line text-3xl
                         2xl:text-5xl
-                    ">{{ doc.title.replace(/\s+/g, '\n') }}</h1>
-                    <p class="whitespace-pre-line text-base 2xl:text-xl font-normal">{{ doc.description }}</p>
+                    ">{{ data.title.replace(/\s+/g, '\n') }}</h1>
+                    <p class="whitespace-pre-line text-base 2xl:text-xl font-normal">{{ data.description }}</p>
                 </div>
                 <div class="flex pt-[140px] pb-[140px] overflow-x-auto relative z-0 scroll-smooth"  :class="{ 'snap-x snap-mandatory' : mounted }">
-                    <figure v-for="(image, index) in doc.gallery.images" :key="index" class="min-h-full px-[30px]"  :class="{ 'snap-always snap-start': mounted }">
-<!--                        <img :src="`/images/interiors/${doc.gallery.folder}/${image}.webp`"-->
+                    <figure v-for="(image, index) in data.gallery.images" :key="index" class="min-h-full px-[30px]"  :class="{ 'snap-always snap-start': mounted }">
+<!--                        <img :src="`/images/interiors/${data.gallery.folder}/${image}.webp`"-->
 <!--                             class="max-w-[none] h-full max-h-[stretch]"-->
-<!--                             :alt="`${doc.title} (${image})`"-->
+<!--                             :alt="`${data.title} (${image})`"-->
 <!--                             loading="lazy"-->
 <!--                        />-->
-                        <nuxt-picture :src="`/images/interiors/${doc.gallery.folder}/${image}.webp`"
+                        <nuxt-picture :src="`/images/interiors/${data.gallery.folder}/${image}.webp`"
                             :imgAttrs="{
                                 class: 'max-w-[none] h-full max-h-[stretch]',
-                                alt: `${doc.title} (${image})`,
+                                alt: `${data.title} (${image})`,
                                 loading: 'lazy'
                             }"
                         />
-<!--                        <nuxt-img :src="`/images/interiors/${doc.gallery.folder}/${image}.webp`"-->
+<!--                        <nuxt-img :src="`/images/interiors/${data.gallery.folder}/${image}.webp`"-->
 <!--                                  class="max-w-[none] h-full max-h-[stretch]"-->
-<!--                                  :alt="`${doc.title} (${image})`"-->
+<!--                                  :alt="`${data.title} (${image})`"-->
 <!--                                  loading="lazy"-->
 <!--                        />-->
                     </figure>
                 </div>
             </div>
         </div>
-    </ContentDoc>
+<!--    </ContentDoc>-->
 </template>
