@@ -1,4 +1,4 @@
-/** @type {import('tailwindcss').Config} */
+  /** @type {import('tailwindcss').Config} */
 const plugin = require('tailwindcss/plugin')
 
 module.exports = {
@@ -21,7 +21,7 @@ module.exports = {
             addBase({
                 'html'  : {
                     fontWeight: 500,
-                    background : theme('colors.primary')
+                    background: theme('colors.primary')
                 }
             })
             addComponents({
@@ -54,10 +54,10 @@ module.exports = {
                 },
                 '.drawer-toggle': {
                     display      : 'flex',
-                    flexDirection : 'column',
+                    flexDirection: 'column',
                     alignSelf    : 'center',
                     padding      : '5px',
-                    span: {
+                    span         : {
                         height              : theme('spacing.2'),
                         width               : theme('spacing.2'),
                         borderRadius        : theme('borderRadius.full'),
@@ -72,9 +72,9 @@ module.exports = {
                 },
                 '.interior-wrapper': {
                     transition: 'z-index .5s ease-out',
-                    '&.end': {
+                    '&.end'   : {
                         flexDirection: 'column-reverse',
-                        '.title': {
+                        '.title'     : {
                             alignItems: 'flex-start'
                         }
                     },
@@ -94,6 +94,13 @@ module.exports = {
                             height: '.25rem'
                         }
                     }
+                },
+                '.hide-scroll': {
+                    '&::-webkit-scrollbar': {
+                        display: 'none'
+                    },
+                    '-ms-overflow-style': 'none',
+                    'scrollbar-width'   : 'none'
                 }
             })
         })

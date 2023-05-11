@@ -1,7 +1,8 @@
 <script setup lang="ts">
-const { t, locale } = useI18n();
-const localePath    = useLocalePath();
-const mounted       = ref(false);
+const { t, locale }      = useI18n();
+const localePath         = useLocalePath();
+const mounted            = ref(false);
+const stories_container  = ref<HTMLDivElement>();
 
 useHead({
     link: [
@@ -13,17 +14,16 @@ useHead({
     ]
 })
 
-onMounted(() => {
-    setTimeout(() => {
-        mounted.value = true;
-    }, 1000);
-});
-
+const scrolling = (e: any) => {
+    e.preventDefault();
+    stories_container.value!.scrollLeft += e.deltaX;
+    stories_container.value!.scrollLeft += e.deltaY;
+}
 </script>
 
 <template>
     <div class="h-screen max-h-[stretch] bg-secondary">
-        <div class="h-full flex pt-[120px] pb-[40px] sm:pt-0 sm:pb-0 overflow-x-auto overflow-y-hidden hide-scroll snap-x snap-mandatory">
+        <div @wheel="scrolling" ref="stories_container" class="h-full flex pt-[120px] pb-[40px] sm:pt-0 sm:pb-0 overflow-x-auto overflow-y-hidden hide-scroll">
             <div class="
                 flex flex-col self-center pl-[30px] min-w-[80vw] max-w-[80vw] snap-start
                 sm:self-auto sm:justify-between sm:p-[150px_0px_250px_100px] sm:min-w-[80vw] sm:max-w-[80vw] sm:z-10

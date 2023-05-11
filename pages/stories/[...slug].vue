@@ -1,9 +1,11 @@
 <script lang="ts" setup>
-const { locale } = useI18n()
-const route      = useRoute()
-const story      = await queryContent(`${locale.value}/stories/${route.params.slug}`).findOne();
-const is_mobile  = ref(true)
-const mounted    = ref(false)
+const { locale }        = useI18n()
+const route             = useRoute()
+const story             = await queryContent(`${locale.value}/stories/${route.params.slug}`).findOne();
+const is_mobile         = ref(true)
+const mounted           = ref(false)
+const image_container   = ref<HTMLDivElement>();
+const content_container = ref<HTMLDivElement>();
 
 useHead({
     link: [
@@ -15,14 +17,26 @@ useHead({
     ]
 })
 
+const onImageScroll = (e: any) => {
+    e.preventDefault();
+    image_container.value!.scrollLeft += e.deltaX;
+    image_container.value!.scrollLeft += e.deltaY;
+}
+
+const onContentScroll = (e: any) => {
+    e.preventDefault();
+    content_container.value!.scrollLeft += e.deltaX;
+    content_container.value!.scrollLeft += e.deltaY;
+}
+
 onMounted(() => {
     setTimeout(() => {
         mounted.value = true;
     }, 1000);
 
-    is_mobile.value = screen.width < 640;
+    is_mobile.value = (screen.width < 640);
     console.log(is_mobile.value);
-    window.addEventListener("resize", () => is_mobile.value = screen.width < 640)
+    window.addEventListener("resize", () => is_mobile.value = (screen.width < 640));
 })
 </script>
 <template>
@@ -33,7 +47,7 @@ onMounted(() => {
         </div>
         <div class="relative flex items-center overflow-x-auto">
             <div v-for="(image, index) in story.gallery.images" :key="index"
-                 class="pl-[30px] last:pr-[30px] scroll-smooth">
+                 class="pl-[30px] last:pr-[30px]">
                 <nuxt-picture :src="`/images/stories/${story.gallery.folder}/${index + image.extension}`"
                     :imgAttrs="{
                         class: 'h-[30vh] max-w-none',
@@ -55,14 +69,15 @@ onMounted(() => {
     <!-- DESKTOP VIEW -->
     <div v-if="!is_mobile" class="hidden sm:grid h-screen grid-cols-[minmax(300px,_20%)_1fr] bg-secondary">
         <div class="bg-primary px-[40px] pt-[140px] pb-[100px] flex flex-col justify-between h-full relative shadow-[6px_0_15px_-3px_rgba(0,0,0,0.1),0_0_6px_-4px_rgba(0,0,0,0.1)] z-10">
-            <h1 class="whitespace-pre-line text-2xl 2xl:text-5xl">{{ story.title.replace(/\s+/g, '\n') }}</h1>
+            <h1 class="whitespace-pre-line text-2xl 2xl:text-5xl">{{ story.title!.replace(/\s+/g, '\n') }}</h1>
             <p class="whitespace-pre-line text-base font-normal 2xl:text-xl">{{ story.info }}</p>
         </div>
         <div class="h-screen overflow-hidden pt-[140px] pb-[100px] flex flex-col">
-            <div class="flex overflow-x-auto hide-scroll snap-x snap-mandatory flex-1">
-                <div v-for="(image, index) in story.gallery.images" :key="index"
-                     class="relative group h-full pl-[30px] scroll-smooth"
-                     :class="{ 'snap-always snap-start': mounted, 'pr-[30px]': story.gallery.images.length == index + 1 }">
+            <div @wheel="onImageScroll" ref="image_container"  class="flex overflow-x-auto hide-scroll flex-1">
+                <div v-for="(image, index) in story.gallery.images" :key="index" 
+                    class="relative group h-full pl-[30px]"
+                    :class="{ 'pr-[30px]': story.gallery.images.length == index + 1 }"
+                >
                     <nuxt-picture :src="`/images/stories/${story.gallery.folder}/${index + image.extension}`"
                         :imgAttrs="{
                             class: 'relative min-h-full max-h-full w-auto min-w-[100%] max-w-none',
@@ -74,7 +89,7 @@ onMounted(() => {
                 </div>
             </div>
             <div class="h-[60%]">
-                <div class="
+                <div @wheel="onContentScroll" ref="content_container" class="
                     h-full text-base font-normal columns-2xs gap-[30px] text-left px-[30px] pt-[30px] overflow-x-auto hide-scroll
                     2xl:text-xl 2xl:columns-md
                 ">
