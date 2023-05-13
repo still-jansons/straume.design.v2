@@ -15,35 +15,35 @@
 
 <template>
     <div class="gallery-wrapper flex flex-col" :class="{ reverse: paginationOnTop }">
-        <figure class="image flex" :class="{ 'flex-row-reverse': isLastItem }">
+        <figure class="image flex h-[45vh]" :class="[ paginationOnTop ? 'items-start' : 'items-end', isLastItem ? 'flex-row-reverse justify-end': '']">
             <template v-for="(image, index) of images">
                 <nuxt-picture
-                        v-show="selected_image == index"
-                        :src="`/images/${folder}/${image}.webp`"
-                        :imgAttrs="{
-                            class: 'w-auto max-w-full max-h-[45vh] relative sm:w-auto sm:max-w-none sm:h-[45vh]',
-                            alt: `${altText} (${images[selected_image]})`,
-                            loading: 'lazy'
-                        }"
-                        legacyFormat="webp"
+                    v-show="selected_image == index"
+                    :src="`/images/${folder}/${image}.webp`"
+                    :imgAttrs="{
+                        class: 'w-auto max-w-full max-h-[45vh] relative sm:w-auto',
+                        alt: `${altText} (${images[selected_image]})`,
+                        loading: 'lazy'
+                    }"
+                    legacyFormat="webp"
                 />
             </template>
             <div v-if="info" class="relative z-[-1]">
-                <Transition :name="`slide-${isLastItem ? 'left' : 'right'}`">
+                <!-- <Transition :name="`slide-${isLastItem ? 'left' : 'right'}`"> -->
                     <div v-show="showInfo"
                         class="
-                            absolute bottom-0 p-6 bg-primary-variant wrapper-info
+                            absolute p-6 bg-primary-variant wrapper-info max-w-xl w-max
                             2xl:p-8
                         "
-                        :class="isLastItem ? 'right-0' : 'left-0'"
+                        :class="[isLastItem ? 'right-0' : 'left-0', paginationOnTop ? 'top-0' : 'bottom-0']"
                     >
                         <p class="
-                            whitespace-pre font-normal
+                            whitespace-pre-line font-normal
                             sm:text-base
-                            2xl:text-2xl
+                            2xl:text-xl
                         ">{{ info }}</p>
                     </div>
-                </Transition>
+                <!-- </Transition> -->
             </div>
         </figure>
         <div v-if="images.length > 1" class="hidden sm:flex sm:items-center mt-[13px] pagination">
@@ -68,23 +68,16 @@
         margin-bottom: 13px;
     }
     .wrapper-info {
-        transition: all .5s ease;
-    }
-
-    .slide-right-enter-from,
-    .slide-right-leave-to,
-    .slide-left-enter-from,
-    .slide-left-leave-to {
-        opacity: 0;
+        transition: all .5s ease-in;
     }
 
     .slide-left-enter-from,
     .slide-left-leave-to {
-        right: -6rem;
+        right: -10rem;
     }
 
     .slide-right-enter-from,
     .slide-right-leave-to {
-        left: -6rem;
+        left: -10rem;
     }
 </style>

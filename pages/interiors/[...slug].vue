@@ -3,7 +3,6 @@ const route              = useRoute()
 const { locale }         = useI18n()
 const interior           = await queryContent(`${locale.value}/interiors/${route.params.slug}`).findOne()
 const is_mobile          = ref(true)
-const mounted            = ref(false)
 const interior_container = ref<HTMLDivElement>();
 
 useHead({
