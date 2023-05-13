@@ -15,7 +15,7 @@
 
 <template>
     <div class="gallery-wrapper flex flex-col" :class="{ reverse: paginationOnTop }">
-        <figure class="image flex h-[45vh]" :class="[ paginationOnTop ? 'items-start' : 'items-end', isLastItem ? 'flex-row-reverse justify-end': '']">
+        <figure class="relative image flex h-[45vh] w-fit" :class="[ paginationOnTop ? 'items-start' : 'items-end', isLastItem ? 'flex-row-reverse justify-end': '']">
             <template v-for="(image, index) of images">
                 <nuxt-picture
                     v-show="selected_image == index"
@@ -23,10 +23,11 @@
                     :imgAttrs="{
                         class: 'w-auto max-w-full max-h-[45vh] relative sm:w-auto',
                         alt: `${altText} (${images[selected_image]})`,
-                        loading: 'lazy'
+                        fetchpriority: 'low'
                     }"
                     legacyFormat="webp"
                 />
+                <div ></div>
             </template>
             <div v-if="info" class="relative z-[-1]">
                 <!-- <Transition :name="`slide-${isLastItem ? 'left' : 'right'}`"> -->
@@ -44,6 +45,10 @@
                         ">{{ info }}</p>
                     </div>
                 <!-- </Transition> -->
+            </div>
+            <div class="absolute inset-0 flex">
+                <button class="w-1/2 h-full" @click="selected_image = (selected_image + images.length - 1) % images.length"></button>
+                <button class="w-1/2 h-full" @click="selected_image = (selected_image + 1) % images.length"></button>
             </div>
         </figure>
         <div v-if="images.length > 1" class="hidden sm:flex sm:items-center mt-[13px] pagination">
