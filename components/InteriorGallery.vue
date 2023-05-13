@@ -33,7 +33,7 @@
                 <!-- <Transition :name="`slide-${isLastItem ? 'left' : 'right'}`"> -->
                     <div v-show="showInfo"
                         class="
-                            absolute p-6 bg-primary-variant wrapper-info max-w-xl w-max
+                            absolute p-6 bg-primary-variant wrapper-info max-w-lg w-max
                             2xl:p-8
                         "
                         :class="[isLastItem ? 'right-0' : 'left-0', paginationOnTop ? 'top-0' : 'bottom-0']"

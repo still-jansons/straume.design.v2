@@ -37,6 +37,8 @@ const scrolling = (e: any) => {
                     sm:mb-[40px]
                     xl:text-3xl
                     2xl:text-5xl
+                    sm:w-[70%]
+                    sm:max-w-xl
                 ">{{ $t('pages.stories.title') }}</h1>
                 <p class="
                     text-base
@@ -48,13 +50,10 @@ const scrolling = (e: any) => {
             <div class="
                 flex h-full z-auto
                 sm:ml-[-5vw] sm:pt-[55px] sm:pb-[140px]
-                2xl:ml-[-5vw]
+                2xl:ml-[-4vw]
             ">
                 <ContentList :path="`${locale}/stories`" v-slot="{ list }">
-                    <Story v-for="(story, index) in list" :key="story._path"
-                        :story="story"
-                        :index="index"
-                    />
+                    <Story v-for="story in list" :key="story._path" :story="story" />
                 </ContentList>
             </div>
         </div>

@@ -31,7 +31,7 @@ onMounted(() => {
 <template>
     <!-- DESKTOP VIEW -->
     <div v-if="!is_mobile"
-        class="relative hidden first:ml-[120px] last:mr-[120px] mx-[80px] max-h-[90vh] min-w-[35vw] w-full sm:block"
+        class="relative hidden first:ml-[120px] last:mr-[120px] mx-[80px] max-h-[90vh] min-w-[33vw] w-full sm:block"
         :style="`align-self: ${interior.position}; z-index: ${isLastItem && (selectedSlug == interior._path)  ? 101 : 100 - itemIndex}`"
     >
         <div class="interior-wrapper sm:inline-flex sm:flex-col" :class="[interior.position]">
