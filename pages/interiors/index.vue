@@ -28,7 +28,7 @@ const scrolling = (e: any) => {
         <div @wheel="scrolling" ref="interiors_container"
             class="
                 h-full flex pt-[120px] pb-[60px] overflow-x-auto hide-scroll overflow-y-auto
-                sm:pt-[55px] sm:pb-[140px]
+                sm:pt-[55px] sm:pb-[100px]
             "
         >
             <ContentList :path="`${locale}/interiors`" v-slot="{ list }">

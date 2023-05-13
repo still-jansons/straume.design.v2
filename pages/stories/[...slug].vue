@@ -52,6 +52,7 @@ onMounted(() => {
                     :imgAttrs="{
                         class: 'h-[30vh] max-w-none',
                         alt: `${image.name}`,
+                        title: `${image.name}`,
                         loading: 'lazy'
                     }"
                 />
@@ -82,6 +83,7 @@ onMounted(() => {
                         :imgAttrs="{
                             class: 'relative min-h-full max-h-full w-auto min-w-[100%] max-w-none',
                             alt: `${image.name}`,
+                            title: `${image.name}`,
                             loading: 'lazy'
                         }" />
                     <span class="block absolute bottom-0 left-[30px] right-0 p-[15px] text-xs bg-primary opacity-0 group-hover:opacity-100"

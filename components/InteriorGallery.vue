@@ -15,19 +15,21 @@
 
 <template>
     <div class="gallery-wrapper flex flex-col" :class="{ reverse: paginationOnTop }">
-        <figure class="relative image flex h-[45vh] w-fit" :class="[ paginationOnTop ? 'items-start' : 'items-end', isLastItem ? 'flex-row-reverse justify-end': '']">
+        <figure class="relative image flex sm:h-[35vh] xl:h-[40vh] w-fit" :class="[isLastItem ? 'flex-row-reverse justify-end': '']">
             <template v-for="(image, index) of images">
                 <nuxt-picture
                     v-show="selected_image == index"
                     :src="`/images/${folder}/${image}.webp`"
                     :imgAttrs="{
-                        class: 'w-auto max-w-full max-h-[45vh] relative sm:w-auto',
+                        class: 'w-auto max-w-full max-h-full relative sm:w-auto',
                         alt: `${altText} (${images[selected_image]})`,
+                        title: `${altText} (${images[selected_image]})`,
                         fetchpriority: 'low'
                     }"
+                    class="h-full flex"
+                    :class="[paginationOnTop ? 'items-start' : 'items-end']"
                     legacyFormat="webp"
                 />
-                <div ></div>
             </template>
             <div v-if="info" class="relative z-[-1]">
                 <!-- <Transition :name="`slide-${isLastItem ? 'left' : 'right'}`"> -->
@@ -51,9 +53,9 @@
                 <button class="w-1/2 h-full" @click="selected_image = (selected_image + 1) % images.length"></button>
             </div>
         </figure>
-        <div v-if="images.length > 1" class="hidden sm:flex sm:items-center mt-[13px] pagination">
+        <div v-if="images.length > 1" class="hidden sm:flex sm:items-center mt-[13px] pagination flex-wrap gap-2">
             <button v-for="(image, index) in images" :key="index"
-                class="inline-flex mr-2 group" 
+                class="inline-flex group" 
                 :class="{ selected: selected_image == index }"
                 :aria-label="`Image ${index + 1}`" 
                 @click="selected_image = index"
