@@ -26,16 +26,16 @@
                 <a href="tel:+37129901196" class="text-2xl">+371 29901196</a>
             </div>
         </div>
-        <div class="relative">
+        <!-- <div class="relative">
             <div class="flex items-center justify-center absolute right-0 left-0 sm:mt-[10vh]">
                 <a href="https://instagram.com/straume.design?igshid=YmMyMTA2M2Y=" target="_blank">
-                    <img src="~/assets/images/icons/ig-dark.svg" alt="Instagram" class="h-[2.5rem] fill-black">
+                    <img src="~/assets/images/icons/ig-dark-2.svg" alt="Instagram" class="h-8">
                 </a>
                 <a href="https://www.facebook.com/straume.design" target="_blank" class="ml-2">
-                    <img src="~/assets/images/icons/fb-dark.svg" alt="Facebook" class="h-[2.2rem] fill-black">
+                    <img src="~/assets/images/icons/fb-dark-2.svg" alt="Facebook" class="h-8">
                 </a>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 
