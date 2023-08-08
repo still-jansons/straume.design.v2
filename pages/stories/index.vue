@@ -1,29 +1,31 @@
-<script setup lang="ts">
-const { t, locale }      = useI18n();
-const localePath         = useLocalePath();
-const mounted            = ref(false);
-const stories_container  = ref<HTMLDivElement>();
+<script lang="ts" setup>
+    const {t, locale} = useI18n();
+    const localePath = useLocalePath();
+    const mounted = ref(false);
+    const stories_container = ref<HTMLDivElement>();
 
-useHead({
-    link: [
-        { rel: 'canonical', href: `https://straume.design${localePath('stories')}` }
-    ],
-    title: `${t('pages.stories.head-title')} | Straume Design`,
-    meta: [
-        { name: 'description', content: t('pages.stories.head-description') }
-    ]
-})
+    useHead({
+        link: [
+            {rel: 'canonical', href: `https://straume.design${localePath('stories')}`}
+        ],
+        title: `${t('pages.stories.head-title')} | Straume Design`,
+        meta: [
+            {name: 'description', content: t('pages.stories.head-description')}
+        ]
+    })
 
-const scrolling = (e: any) => {
-    e.preventDefault();
-    stories_container.value!.scrollLeft += e.deltaX;
-    stories_container.value!.scrollLeft += e.deltaY;
-}
+    const scrolling = (e: any) => {
+        e.preventDefault();
+        stories_container.value!.scrollLeft += e.deltaX;
+        stories_container.value!.scrollLeft += e.deltaY;
+    }
 </script>
 
 <template>
     <div class="h-screen max-h-[stretch] bg-secondary">
-        <div @wheel="scrolling" ref="stories_container" class="h-full flex pt-[120px] pb-[40px] sm:pt-0 sm:pb-0 overflow-x-auto overflow-y-hidden hide-scroll">
+        <div ref="stories_container"
+             class="h-full flex pt-[120px] pb-[40px] sm:pt-0 sm:pb-0 overflow-x-auto overflow-y-hidden hide-scroll"
+             @wheel="scrolling">
             <div class="
                 flex flex-col self-center pl-[30px] min-w-[80vw] max-w-[80vw] snap-start
                 sm:self-auto sm:justify-between sm:p-[150px_0px_250px_100px] sm:min-w-[80vw] sm:max-w-[80vw] sm:z-10
@@ -35,10 +37,10 @@ const scrolling = (e: any) => {
                     mb-[30px]
                     text-3xl
                     sm:mb-[40px]
-                    xl:text-3xl
-                    2xl:text-5xl
                     sm:w-[70%]
                     sm:max-w-xl
+                    xl:text-3xl
+                    2xl:text-5xl
                 ">{{ $t('pages.stories.title') }}</h1>
                 <p class="
                     text-base
@@ -52,8 +54,8 @@ const scrolling = (e: any) => {
                 sm:ml-[-5vw] sm:pt-[55px] sm:pb-[140px]
                 2xl:ml-[-4vw]
             ">
-                <ContentList :path="`${locale}/stories`" v-slot="{ list }">
-                    <Story v-for="story in list" :key="story._path" :story="story" />
+                <ContentList v-slot="{ list }" :path="`${locale}/stories`">
+                    <Story v-for="story in list" :key="story._path" :story="story"/>
                 </ContentList>
             </div>
         </div>

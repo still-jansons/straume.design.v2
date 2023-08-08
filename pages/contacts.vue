@@ -1,20 +1,21 @@
-<script setup lang="ts">
-    const { t } = useI18n();
+<script lang="ts" setup>
+    const {t} = useI18n();
     const localePath = useLocalePath();
 
     useHead({
         link: [
-            { rel: 'canonical', href: `https://straume.design${localePath('contacts')}` }
+            {rel: 'canonical', href: `https://straume.design${localePath('contacts')}`}
         ],
         title: `${t('pages.contacts.head-title')} | Straume Design`,
         meta: [
-            { name: 'description', content: t('pages.contacts.head-title') }
+            {name: 'description', content: t('pages.contacts.head-title')}
         ]
     })
 </script>
 
 <template>
-    <div id="containerContacts" class="px-[10vw] h-screen max-h-[stretch] w-screen bg-primary-variant flex flex-col justify-center">
+    <div id="containerContacts"
+         class="px-[10vw] h-screen max-h-[stretch] w-screen bg-primary-variant flex flex-col justify-center">
         <div class="flex flex-col sm:flex-row items-center justify-between">
             <div class="mb-[40px] sm:mb-0 sm:mr-4">
                 <h2 class="text-2xl">Annija Straume</h2>
@@ -23,7 +24,7 @@
                 <a class="not-italic text-2xl" href="mailto:annija@straume.design">annija@straume.design</a>
             </address>
             <div class="mb-[40px] sm:mb-0 sm:ml-4">
-                <a href="tel:+37129901196" class="text-2xl">+371 29901196</a>
+                <a class="text-2xl" href="tel:+37129901196">+371 29901196</a>
             </div>
         </div>
         <!-- <div class="relative">
