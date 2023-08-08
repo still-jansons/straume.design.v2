@@ -1,0 +1,20 @@
+
+<svg xmlns="http://www.w3.org/2000/svg"
+     class="svg-snoweb svg-theme-light"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%"
+     viewBox="0 0 100 100"
+     preserveAspectRatio="xMidYMid meet"
+>
+<defs>
+    <style>
+        .svg-stroke-primary {
+            stroke: #B57E3E;
+        }
+    </style>
+</defs>
+    <path d="M43.3,73.5,19.8,50m0,0L43.3,26.5M19.8,50H80.2" fill="none" class="svg-stroke-primary" stroke-linecap="round" stroke-linejoin="round" stroke-width="8"/>
+
+</svg>

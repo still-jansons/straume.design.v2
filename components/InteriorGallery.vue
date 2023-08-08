@@ -15,40 +15,47 @@
 
 <template>
     <div class="gallery-wrapper flex flex-col" :class="{ reverse: paginationOnTop }">
-        <figure class="image flex" :class="{ 'flex-row-reverse': isLastItem }">
+        <figure class="relative image flex sm:h-[35vh] xl:h-[40vh] w-fit" :class="[isLastItem ? 'flex-row-reverse justify-end': '']">
             <template v-for="(image, index) of images">
                 <nuxt-picture
-                        v-show="selected_image == index"
-                        :src="`/images/${folder}/${image}.webp`"
-                        :imgAttrs="{
-                            class: 'w-auto max-w-full max-h-[45vh] relative sm:w-auto sm:max-w-none sm:h-[45vh]',
-                            alt: `${altText} (${images[selected_image]})`,
-                            loading: 'lazy'
-                        }"
-                        legacyFormat="webp"
+                    v-show="selected_image == index"
+                    :src="`/images/${folder}/${image}.webp`"
+                    :imgAttrs="{
+                        class: 'w-auto max-w-full max-h-full relative sm:w-auto',
+                        alt: `${altText} (${images[selected_image]})`,
+                        title: `${altText} (${images[selected_image]})`,
+                        fetchpriority: 'low'
+                    }"
+                    class="h-full flex"
+                    :class="[paginationOnTop ? 'items-start' : 'items-end']"
+                    legacyFormat="webp"
                 />
             </template>
             <div v-if="info" class="relative z-[-1]">
-                <Transition :name="`slide-${isLastItem ? 'left' : 'right'}`">
+                <!-- <Transition :name="`slide-${isLastItem ? 'left' : 'right'}`"> -->
                     <div v-show="showInfo"
                         class="
-                            absolute bottom-0 p-6 bg-primary-variant wrapper-info
+                            absolute p-6 bg-primary-variant wrapper-info max-w-lg w-max
                             2xl:p-8
                         "
-                        :class="isLastItem ? 'right-0' : 'left-0'"
+                        :class="[isLastItem ? 'right-0' : 'left-0', paginationOnTop ? 'top-0' : 'bottom-0']"
                     >
                         <p class="
-                            whitespace-pre font-normal
+                            whitespace-pre-line font-normal
                             sm:text-base
-                            2xl:text-2xl
+                            2xl:text-xl
                         ">{{ info }}</p>
                     </div>
-                </Transition>
+                <!-- </Transition> -->
+            </div>
+            <div class="absolute inset-0 flex">
+                <button class="w-1/2 h-full" @click="selected_image = (selected_image + images.length - 1) % images.length"></button>
+                <button class="w-1/2 h-full" @click="selected_image = (selected_image + 1) % images.length"></button>
             </div>
         </figure>
-        <div v-if="images.length > 1" class="hidden sm:flex sm:items-center mt-[13px] pagination">
+        <div v-if="images.length > 1" class="hidden sm:flex sm:items-center mt-[13px] pagination flex-wrap gap-2">
             <button v-for="(image, index) in images" :key="index"
-                class="inline-flex mr-2 group" 
+                class="inline-flex group" 
                 :class="{ selected: selected_image == index }"
                 :aria-label="`Image ${index + 1}`" 
                 @click="selected_image = index"
@@ -68,23 +75,16 @@
         margin-bottom: 13px;
     }
     .wrapper-info {
-        transition: all .5s ease;
-    }
-
-    .slide-right-enter-from,
-    .slide-right-leave-to,
-    .slide-left-enter-from,
-    .slide-left-leave-to {
-        opacity: 0;
+        transition: all .5s ease-in;
     }
 
     .slide-left-enter-from,
     .slide-left-leave-to {
-        right: -6rem;
+        right: -10rem;
     }
 
     .slide-right-enter-from,
     .slide-right-leave-to {
-        left: -6rem;
+        left: -10rem;
     }
 </style>

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+
 const head  = useLocaleHead({
     addDirAttribute    : true,
     identifierAttribute: 'id',

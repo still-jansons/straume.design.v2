@@ -1,84 +1,96 @@
 <script lang="ts" setup>
-const { locale } = useI18n()
-const route      = useRoute()
-const story      = await queryContent(`${locale.value}/stories/${route.params.slug}`).findOne();
-const is_mobile  = ref(true)
-const mounted    = ref(false)
+    const {locale}          = useI18n()
+    const route             = useRoute()
+    const story             = await queryContent(`${locale.value}/stories/${route.params.slug}`).findOne();
+    const [prev, next]      = await queryContent().only(['_path', 'title']).findSurround(`/${locale.value}/stories/${route.params.slug}`)
+    const is_mobile         = ref(true)
+    const mounted           = ref(false)
+    const image_container   = ref<HTMLDivElement>();
+    const content_container = ref<HTMLDivElement>();
 
-useHead({
-    link: [
-        { rel: 'canonical', href: `https://straume.design/${route.params.slug}` }
-    ],
-    title: `${story.title} | Straume Design`,
-    meta: [
-        { name: 'description', content: story.description }
-    ]
-})
+    useHead({
+        link: [
+            {rel: 'canonical', href: `https://straume.design/${route.params.slug}`}
+        ],
+        title: `${story.title} | Straume Design`,
+        meta: [
+            {name: 'description', content: story.description}
+        ]
+    })
 
-onMounted(() => {
-    setTimeout(() => {
-        mounted.value = true;
-    }, 1000);
+    const onImageScroll = (e: any) => {
+        e.preventDefault();
+        image_container.value!.scrollLeft += e.deltaX;
+        image_container.value!.scrollLeft += e.deltaY;
+    }
 
-    is_mobile.value = screen.width < 640;
-    console.log(is_mobile.value);
-    window.addEventListener("resize", () => is_mobile.value = screen.width < 640)
-})
+    const onContentScroll = (e: any) => {
+        e.preventDefault();
+        content_container.value!.scrollLeft += e.deltaX;
+        content_container.value!.scrollLeft += e.deltaY;
+    }
+
+    onMounted(() => {
+        setTimeout(() => {
+            mounted.value = true;
+        }, 1000);
+
+        is_mobile.value = (screen.width < 640);
+        console.log(is_mobile.value);
+        window.addEventListener("resize", () => is_mobile.value = (screen.width < 640));
+    })
 </script>
 <template>
-    <!-- MOBILE VIEW -->
-    <div v-if="is_mobile" class="sm:hidden w-screen min-h-full bg-secondary pt-[120px]">
-        <div class="px-[30px] pb-[30px]">
-            <h1 class="text-3xl">{{ story.title }}</h1>
-        </div>
-        <div class="relative flex items-center overflow-x-auto">
-            <div v-for="(image, index) in story.gallery.images" :key="index"
-                 class="pl-[30px] last:pr-[30px] scroll-smooth">
-                <nuxt-picture :src="`/images/stories/${story.gallery.folder}/${index + image.extension}`"
-                    :imgAttrs="{
-                        class: 'h-[30vh] max-w-none',
-                        alt: `${image.name}`,
-                        loading: 'lazy'
-                    }"
-                />
-                <span class="text-xs p-[10px_15px] bg-primary block">{{ image.name }}</span>
-            </div>
-        </div>
-        <div class="p-[30px] text-base text-left font-normal">
-            <ContentRenderer :value="story" />
-        </div>
-        <div class="p-[30px] bg-primary">
-            <p class="whitespace-pre-line text-base">{{ story.info }}</p>
-        </div>
-    </div>
-    <!--  -->
     <!-- DESKTOP VIEW -->
-    <div v-if="!is_mobile" class="hidden sm:grid h-screen grid-cols-[minmax(300px,_20%)_1fr] bg-secondary">
-        <div class="bg-primary px-[40px] pt-[140px] pb-[100px] flex flex-col justify-between h-full relative shadow-[6px_0_15px_-3px_rgba(0,0,0,0.1),0_0_6px_-4px_rgba(0,0,0,0.1)] z-10">
-            <h1 class="whitespace-pre-line text-2xl 2xl:text-5xl">{{ story.title.replace(/\s+/g, '\n') }}</h1>
-            <p class="whitespace-pre-line text-base font-normal 2xl:text-xl">{{ story.info }}</p>
-        </div>
-        <div class="h-screen overflow-hidden pt-[140px] pb-[100px] flex flex-col">
-            <div class="flex overflow-x-auto hide-scroll snap-x snap-mandatory flex-1">
-                <div v-for="(image, index) in story.gallery.images" :key="index"
-                     class="relative group h-full pl-[30px] scroll-smooth"
-                     :class="{ 'snap-always snap-start': mounted, 'pr-[30px]': story.gallery.images.length == index + 1 }">
-                    <nuxt-picture :src="`/images/stories/${story.gallery.folder}/${index + image.extension}`"
-                        :imgAttrs="{
-                            class: 'relative min-h-full max-h-full w-auto min-w-[100%] max-w-none',
-                            alt: `${image.name}`,
-                            loading: 'lazy'
-                        }" />
-                    <span class="block absolute bottom-0 left-[30px] right-0 p-[15px] text-xs bg-primary opacity-0 group-hover:opacity-100"
-                          :class="{ 'right-[30px]': story.gallery.images.length == index + 1 }">{{ image.name }}</span>
-                </div>
+    <div class="min-h-full sm:h-screen sm:overflow-hidden pt-[120px] sm:pt-[140px] sm:pb-[90px] sm:flex flex-col bg-secondary">
+        <div
+            ref    = "image_container"
+            class  = "grid sm:flex grid-flow-col overflow-x-auto hide-scroll sm:flex-1 gap-[15px] px-[30px] sm:px-10"
+            @wheel = "onImageScroll"
+        >
+            <div
+                v-for = "(image, index) in story.gallery.images"
+                :key  = "index"
+                class = "relative group h-full flex sm:block flex-col"
+            >
+                <nuxt-picture
+                    :imgAttrs="{
+                        class: 'relative min-h-full w-auto min-w-[100%] max-w-none min-h-[30vh] max-h-[30vh] sm:max-h-full',
+                        alt  : `${image.name}`,
+                        title: `${image.name}`
+                    }"
+                    :src="`/images/stories/${story.gallery.folder}/${index + image.extension}`"
+                />
+                <span class="flex items-center relative sm:absolute bottom-0 left-0 right-0 p-[15px] text-xs bg-primary sm:opacity-0 sm:group-hover:opacity-100 h-full sm:h-auto flex-1">{{image.name}}</span>
             </div>
-            <div class="h-[60%]">
-                <div class="
-                    h-full text-base font-normal columns-2xs gap-[30px] text-left px-[30px] pt-[30px] overflow-x-auto hide-scroll
+        </div>
+        <div class="sm:h-[60%]">
+            <div
+                ref   = "content_container"
+                class = "
+                    min-h-full h-full text-base font-normal sm:columns-2xs gap-[30px] sm:gap-10 text-left px-[30px] sm:px-10 pt-[30px] sm:overflow-x-auto hide-scroll whitespace-break-spaces
                     2xl:text-xl 2xl:columns-md
-                ">
-                    <ContentRenderer :value="story" />
+                "
+                @wheel = "onContentScroll"
+            >
+                <div class="mb-5 pb-5 border-b border-primary">
+                    <h1 class="whitespace-pre-line font-semibold text-xl 2xl:text-2xl mb-2">{{ story.title }}</h1>
+                    <p class="whitespace-pre-line font-normal text-sm text-primary-variant">{{ story.info }}</p>
+                </div>
+                <ContentRenderer :value="story"/>
+                <div class="flex pt-5 sm:pt-2.5 mt-2.5 pb-5 border-t border-primary justify-end">
+                    <NuxtLink
+                        v-if  = "next && next._path.includes('/stories/')"
+                        :to   = "next._path.replace('/en', '')"
+                        class = "group text-base 2xl:text-xl font-medium text-ellipsis overflow-hidden"
+                    >
+                        {{ next.title }}
+                        <img
+                            alt   = "Instagram"
+                            class = "inline-block align-text-top h-5 2xl:h-6 group-hover:translate-x-1 transition-transform ease-in"
+                            src   = "~/assets/images/icons/arrow-right.svg"
+                        />
+                    </NuxtLink>
                 </div>
             </div>
         </div>
