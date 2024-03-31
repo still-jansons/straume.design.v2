@@ -18,7 +18,7 @@
          class="px-[10vw] h-screen max-h-[stretch] w-screen bg-primary-variant flex flex-col justify-center">
         <div class="flex flex-col sm:flex-row items-center justify-between">
             <div class="mb-[40px] sm:mb-0 sm:mr-4">
-                <h2 class="text-2xl">Annija Straume</h2>
+                <h2 class="text-2xl">Annija Straume-Kokina</h2>
             </div>
             <address class="mb-[40px] sm:mb-0 sm:mr-4 sm:ml-4">
                 <a class="not-italic text-2xl" href="mailto:annija@straume.design">annija@straume.design</a>
@@ -39,4 +39,3 @@
         </div> -->
     </div>
 </template>
-
